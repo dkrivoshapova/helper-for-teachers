@@ -6,12 +6,20 @@ import matplotlib.pyplot as plt
 
 
 def main():
+    """
+    Tne main function
+    :return: None
+    """
     r_answers, criterio, results = opening()
     results = performance(results, criterio, r_answers)
     outer(results)
 
 
 def opening():
+    """
+    Get information from the file
+    :return: answers, marks, results
+    """
     a = input('Введите название файла: ')
     with open(a) as f_in:
         line = f_in.readline()
@@ -31,6 +39,13 @@ def opening():
 
 
 def performance(res, marks, ans):
+    """
+
+    :param res: results of the students
+    :param marks: criteria of mark
+    :param ans: the tight answer
+    :return:
+    """
     stat = [0] * 10
     c5, c4, c3, c2 = 0, 0, 0, 0
     for ind in res:
@@ -63,6 +78,11 @@ def performance(res, marks, ans):
 
 
 def outer(res):
+    """
+    Create new file with student and their marks
+    :param res: students' answer
+    :return: None
+    """
     with open('output.txt', 'w') as f_out:
         print('{:25s}{:8s}{:8s}'.format('Фамилия Имя', 'баллы', 'оценка'), file=f_out)
         print('_' * 40, file=f_out)
@@ -71,6 +91,11 @@ def outer(res):
 
 
 def bar(stat):
+    """
+    Create a bar with statistic
+    :param stat: statistic
+    :return: None
+    """
     left_edges = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
     bar_width = 10
     plt.bar(left_edges, stat, bar_width, color=('r', 'g', 'b', 'm', 'k'))
@@ -83,6 +108,15 @@ def bar(stat):
 
 
 def pie(c2, c3, c4, c5, summ):
+    """
+    Create a pie
+    :param c2: quantity of 2
+    :param c3: quantity of 3
+    :param c4: quantity of 4
+    :param c5: quantity of 5
+    :param summ: number of student
+    :return: None
+    """
     plt.title('Статистика распределения оценок')
     l = ['2 ' + '{:4.2%}'.format(c2 / summ), '3 ' + '{:4.2%}'.format(c3 / summ), '4 ' + '{:4.2%}'.format(c4 / summ),
          '5 ' + '{:4.2%}'.format(c5 / summ)]
